@@ -250,6 +250,22 @@ get_header();
 			</div>
 			<div class="tl-products__grid">
 				<?php
+				// Debug info for admins only
+				if ( current_user_can( 'manage_options' ) ) {
+					$debug_info = array();
+					$debug_info[] = 'WooCommerce: ' . ( function_exists( 'wc_get_products' ) ? '✓ Active' : '✗ Not installed' );
+					
+					if ( function_exists( 'wc_get_products' ) ) {
+						$product_count = wp_count_posts( 'product' );
+						$debug_info[] = 'Products: ' . ( $product_count->publish ?? 0 ) . ' published';
+					}
+					
+					echo '<div style="background:#fff3cd;border:1px solid #ffc107;padding:1rem;margin-bottom:1rem;font-size:0.875rem;">';
+					echo '<strong>Debug (Admin only):</strong><br>';
+					echo implode( '<br>', $debug_info );
+					echo '</div>';
+				}
+				
 				if ( function_exists( 'wc_get_products' ) ) {
 					$products = wc_get_products( array(
 						'limit'   => 6,

@@ -100,4 +100,82 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ----------------------------------------------------------------
+  // Single Product — Gallery Thumbnails
+  // ----------------------------------------------------------------
+  const thumbs = document.querySelectorAll('.tl-sp__thumb');
+  const slides = document.querySelectorAll('.tl-sp__gallery-slide');
+
+  if (thumbs.length > 0 && slides.length > 0) {
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        const index = this.getAttribute('data-index');
+
+        thumbs.forEach(function (t) { t.classList.remove('tl-sp__thumb--active'); });
+        this.classList.add('tl-sp__thumb--active');
+
+        slides.forEach(function (s) { s.classList.remove('tl-sp__gallery-slide--active'); });
+        const target = document.querySelector('.tl-sp__gallery-slide[data-index="' + index + '"]');
+        if (target) {
+          target.classList.add('tl-sp__gallery-slide--active');
+        }
+      });
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // Single Product — Tabs
+  // ----------------------------------------------------------------
+  const tabBtns = document.querySelectorAll('.tl-sp__tab-btn');
+  const tabPanels = document.querySelectorAll('.tl-sp__tab-panel');
+
+  if (tabBtns.length > 0) {
+    tabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const targetId = this.getAttribute('aria-controls');
+
+        tabBtns.forEach(function (b) {
+          b.classList.remove('tl-sp__tab-btn--active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        this.classList.add('tl-sp__tab-btn--active');
+        this.setAttribute('aria-selected', 'true');
+
+        tabPanels.forEach(function (p) {
+          p.classList.remove('tl-sp__tab-panel--active');
+        });
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.classList.add('tl-sp__tab-panel--active');
+        }
+      });
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // Single Product — Quantity +/- Buttons
+  // ----------------------------------------------------------------
+  const qtyMinus = document.querySelector('.tl-sp__qty-btn--minus');
+  const qtyPlus = document.querySelector('.tl-sp__qty-btn--plus');
+  const qtyInput = document.getElementById('tl-sp-qty');
+
+  if (qtyMinus && qtyPlus && qtyInput) {
+    const min = parseInt(qtyInput.getAttribute('min'), 10) || 1;
+    const max = parseInt(qtyInput.getAttribute('max'), 10) || 9999;
+
+    qtyMinus.addEventListener('click', function () {
+      const current = parseInt(qtyInput.value, 10) || min;
+      if (current > min) {
+        qtyInput.value = current - 1;
+      }
+    });
+
+    qtyPlus.addEventListener('click', function () {
+      const current = parseInt(qtyInput.value, 10) || min;
+      if (current < max) {
+        qtyInput.value = current + 1;
+      }
+    });
+  }
 })();
