@@ -4,97 +4,15 @@
    ================================================================== */
 
 /* ------------------------------------------------------------------
-   RESET: Neutralize WooCommerce default styles
+   LAYOUT RESETS — low specificity, only fix layout issues
    ------------------------------------------------------------------ */
 
-.woocommerce div.product,
-.woocommerce div.product .summary,
-.woocommerce div.product .woocommerce-tabs,
-.woocommerce div.product .related {
-  margin: 0;
-  padding: 0;
-}
-
-.woocommerce div.product .product_title,
-.woocommerce div.product .price,
-.woocommerce div.product .woocommerce-product-details__short-description,
-.woocommerce div.product .single_add_to_cart_button {
-  margin: 0;
-  padding: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  color: inherit;
-  background: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  text-transform: none;
-  letter-spacing: inherit;
-}
-
-.woocommerce div.product form.cart {
-  margin: 0;
-  padding: 0;
-}
-
-.woocommerce div.product form.cart .quantity {
-  margin: 0;
-  float: none;
-}
-
-.woocommerce div.product .woocommerce-product-gallery {
-  margin: 0;
-  padding: 0;
-  float: none;
-  width: auto;
-}
-
-.woocommerce .woocommerce-breadcrumb {
-  margin: 0;
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
-}
-
-.woocommerce .star-rating {
-  font-size: inherit;
-  width: auto;
-  height: auto;
-  color: #F59E0B;
-}
-
-.woocommerce .star-rating::before,
-.woocommerce .star-rating span::before {
-  color: #F59E0B;
-}
-
-.woocommerce .woocommerce-Reviews #comments,
-.woocommerce .woocommerce-Reviews #review_form_wrapper {
-  margin: 0;
-  padding: 0;
-}
-
-.woocommerce #respond input#submit,
-.woocommerce a.button,
-.woocommerce button.button,
-.woocommerce input.button {
-  font-size: inherit;
-  font-weight: inherit;
-  padding: inherit;
-  background: inherit;
-  color: inherit;
-  border: inherit;
-  border-radius: inherit;
-}
-
-/* Hide WC default elements we replace */
-.woocommerce div.product .woocommerce-product-rating,
-.woocommerce div.product .product_meta > .sku_wrapper,
-.woocommerce div.product .product_meta > .posted_in,
-.woocommerce div.product .product_meta > .tagged_as {
-  display: none;
-}
+.woocommerce div.product { margin: 0; }
+.woocommerce div.product .summary { margin: 0; }
+.woocommerce div.product form.cart { margin: 0; }
+.woocommerce div.product form.cart .quantity { float: none; margin: 0; }
+.woocommerce div.product .woocommerce-product-gallery { float: none; width: auto; margin: 0; }
+.woocommerce .woocommerce-breadcrumb { margin: 0; padding: 0; }
 
 /* ------------------------------------------------------------------
    Breadcrumbs
@@ -227,7 +145,7 @@
   padding: 0.375rem 0.875rem;
   border-radius: 9999px;
   background: var(--destructive);
-  color: var(--destructive-foreground);
+  color: #fff;
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -452,13 +370,13 @@
   background: var(--surface);
 }
 
-/* WC generates a .quantity wrapper inside our .tl-sp__quantity — neutralize it */
+/* Neutralize WC .quantity wrapper inside our container */
 .tl-sp__quantity .quantity {
   display: flex;
   align-items: center;
-  margin: 0;
-  float: none;
-  width: auto;
+  margin: 0 !important;
+  float: none !important;
+  padding: 0 !important;
 }
 
 .tl-sp__qty-btn {
@@ -471,6 +389,7 @@
   color: var(--foreground);
   cursor: pointer;
   transition: background-color 0.15s ease;
+  flex-shrink: 0;
 }
 
 .tl-sp__qty-btn:hover {
@@ -481,24 +400,26 @@
   background: var(--muted);
 }
 
-/* Target both our custom input and WC-generated .qty inside .quantity wrapper */
+/* WC quantity input — covers both direct .qty and .quantity .qty */
 .tl-sp__quantity .qty,
-.tl-sp__quantity .quantity .qty,
 .tl-sp__quantity input[type="number"] {
-  width: 3rem;
-  height: 2.75rem;
-  text-align: center;
-  border: none;
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  font-size: 1rem;
-  font-weight: 500;
-  background: transparent;
-  color: var(--foreground);
+  width: 3rem !important;
+  height: 2.75rem !important;
+  text-align: center !important;
+  border: none !important;
+  border-left: 1px solid var(--border) !important;
+  border-right: 1px solid var(--border) !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  color: var(--foreground) !important;
   -moz-appearance: textfield;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  -webkit-appearance: none;
 }
 
 .tl-sp__quantity .qty::-webkit-outer-spin-button,
@@ -507,11 +428,6 @@
 .tl-sp__quantity input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-.tl-sp__quantity .qty:focus,
-.tl-sp__quantity input[type="number"]:focus {
-  outline: none;
 }
 
 /* Add to cart button */
@@ -943,7 +859,7 @@
 
 .tl-product-card__tag--sale {
   background: var(--destructive) !important;
-  color: var(--destructive-foreground) !important;
+  color: #fff !important;
 }
 
 .tl-product-card__tag--oos {
