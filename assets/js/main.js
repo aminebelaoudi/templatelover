@@ -178,4 +178,176 @@
       }
     });
   }
+
+  // ----------------------------------------------------------------
+  // Toast Notification System
+  // ----------------------------------------------------------------
+  function showToast(title, message, duration) {
+    duration = duration || 4000;
+
+    // Remove existing toast
+    var existing = document.querySelector('.tl-toast');
+    if (existing) {
+      existing.remove();
+    }
+
+    var toast = document.createElement('div');
+    toast.className = 'tl-toast';
+    toast.innerHTML =
+      '<span class="tl-toast__icon">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+      '</span>' +
+      '<span class="tl-toast__content">' +
+        '<span class="tl-toast__title">' + title + '</span>' +
+        '<span class="tl-toast__message">' + message + '</span>' +
+      '</span>' +
+      '<button class="tl-toast__close" aria-label="Close">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>';
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(function () {
+      toast.classList.add('is-visible');
+    });
+
+    toast.querySelector('.tl-toast__close').addEventListener('click', function () {
+      hideToast(toast);
+    });
+
+    setTimeout(function () {
+      hideToast(toast);
+    }, duration);
+  }
+
+  function hideToast(toast) {
+    toast.classList.remove('is-visible');
+    setTimeout(function () {
+      if (toast.parentNode) {
+        toast.remove();
+      }
+    }, 400);
+  }
+
+  // ----------------------------------------------------------------
+  // WooCommerce AJAX Add to Cart — Hook into WC events
+  // ----------------------------------------------------------------
+  var addToCartBtn = document.querySelector('.tl-sp__add-to-cart');
+  var cartForm = document.querySelector('.tl-sp__cart-form');
+
+  if (addToCartBtn && typeof jQuery !== 'undefined') {
+    // When WC starts the AJAX request
+    jQuery(document.body).on('adding_to_cart', function (ev, $button) {
+      if ($button && $button.hasClass('single_add_to_cart_button')) {
+        $button.addClass('is-loading');
+        $button.prop('disabled', true);
+      }
+    });
+
+    // When WC finishes the AJAX request
+    jQuery(document.body).on('added_to_cart', function (ev, fragments, cart_hash, $button) {
+      if ($button && $button.hasClass('single_add_to_cart_button')) {
+        $button.removeClass('is-loading');
+        $button.addClass('is-done');
+
+        // Show toast
+        var productName = document.querySelector('.tl-sp__title');
+        var name = productName ? productName.textContent : 'Product';
+        showToast(
+          'Added to cart!',
+          name + ' has been added to your cart.',
+          4000
+        );
+
+        // Reset button after delay
+        setTimeout(function () {
+          $button.removeClass('is-done');
+          $button.prop('disabled', false);
+        }, 2000);
+      }
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // Fallback AJAX Add to Cart (if WC JS doesn't intercept)
+  // ----------------------------------------------------------------
+  if (cartForm && addToCartBtn && typeof jQuery === 'undefined') {
+    cartForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (addToCartBtn.classList.contains('is-loading') || addToCartBtn.classList.contains('is-done')) {
+        return;
+      }
+
+      var productId = addToCartBtn.getAttribute('data-product_id');
+      var quantityEl = cartForm.querySelector('.qty, input[type="number"]');
+      var quantity = quantityEl ? quantityEl.value : 1;
+
+      addToCartBtn.classList.add('is-loading');
+      addToCartBtn.disabled = true;
+
+      var ajaxUrl = (window.wc_add_to_cart_params)
+        ? wc_add_to_cart_params.ajax_url
+        : (window.templateloverData && window.templateloverData.ajaxUrl)
+          ? window.templateloverData.ajaxUrl
+          : '/wp-admin/admin-ajax.php';
+
+      var body = 'action=woocommerce_ajax_add_to_cart' +
+                 '&product_id=' + encodeURIComponent(productId) +
+                 '&quantity=' + encodeURIComponent(quantity);
+
+      if (window.wc_add_to_cart_params) {
+        body += '&add-to-cart=' + encodeURIComponent(productId);
+      }
+
+      fetch(ajaxUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body,
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        addToCartBtn.classList.remove('is-loading');
+
+        if (data && data.error) {
+          addToCartBtn.disabled = false;
+          showToast('Error', data.message || 'Could not add to cart.', 5000);
+          return;
+        }
+
+        addToCartBtn.classList.add('is-done');
+
+        // Update fragments
+        if (data && data.fragments) {
+          Object.keys(data.fragments).forEach(function (sel) {
+            var el = document.querySelector(sel);
+            if (el) el.outerHTML = data.fragments[sel];
+          });
+        }
+
+        // Update cart count
+        var count = data && data.cart_count !== undefined ? data.cart_count : null;
+        if (count !== null) {
+          document.querySelectorAll('.templatelover-cart-count').forEach(function (el) {
+            el.textContent = count;
+            el.setAttribute('data-count', count);
+          });
+        }
+
+        var productName = document.querySelector('.tl-sp__title');
+        var name = productName ? productName.textContent : 'Product';
+        showToast('Added to cart!', name + ' has been added to your cart.', 4000);
+
+        setTimeout(function () {
+          addToCartBtn.classList.remove('is-done');
+          addToCartBtn.disabled = false;
+        }, 2000);
+      })
+      .catch(function () {
+        addToCartBtn.classList.remove('is-loading');
+        addToCartBtn.disabled = false;
+        cartForm.submit();
+      });
+    });
+  }
 })();

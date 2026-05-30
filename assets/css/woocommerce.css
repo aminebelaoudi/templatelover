@@ -448,6 +448,8 @@
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
 }
 
 .tl-sp__add-to-cart:hover {
@@ -459,6 +461,179 @@
 
 .tl-sp__add-to-cart:active {
   transform: translateY(0);
+}
+
+.tl-sp__add-to-cart-text,
+.tl-sp__add-to-cart-loading,
+.tl-sp__add-to-cart-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tl-sp__add-to-cart-loading,
+.tl-sp__add-to-cart-done {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Loading state */
+.tl-sp__add-to-cart.is-loading .tl-sp__add-to-cart-text {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.tl-sp__add-to-cart.is-loading .tl-sp__add-to-cart-loading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tl-sp__add-to-cart.is-loading .tl-sp__add-to-cart-loading svg {
+  animation: tl-spin 0.8s linear infinite;
+}
+
+@keyframes tl-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Done state */
+.tl-sp__add-to-cart.is-done {
+  background: #059669;
+  color: #fff;
+}
+
+.tl-sp__add-to-cart.is-done .tl-sp__add-to-cart-text {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.tl-sp__add-to-cart.is-done .tl-sp__add-to-cart-done {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------
+   Toast Notification
+   ------------------------------------------------------------------ */
+
+.tl-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  max-width: 24rem;
+}
+
+.tl-toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tl-toast__icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #059669;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.tl-toast__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.tl-toast__title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.tl-toast__message {
+  font-size: 0.8125rem;
+  opacity: 0.8;
+}
+
+.tl-toast__close {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: inherit;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+  margin-left: 0.5rem;
+}
+
+.tl-toast__close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+@media (max-width: 640px) {
+  .tl-toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   PayPal Express Button area
+   ------------------------------------------------------------------ */
+
+.tl-sp__paypal-area {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tl-sp__paypal-area .paypal-button,
+.tl-sp__paypal-area [data-paypal-button],
+.tl-sp__paypal-area .wc-paypal-express-button,
+.tl-sp__paypal-area .ppc-button-overlay-host {
+  width: 100% !important;
+  border-radius: 9999px !important;
+}
+
+.tl-sp__paypal-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tl-sp__paypal-divider::before,
+.tl-sp__paypal-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
 }
 
 /* Out of stock */
