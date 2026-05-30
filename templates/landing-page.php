@@ -250,42 +250,113 @@ get_header();
 			</div>
 			<div class="tl-products__grid">
 				<?php
-				$products = array(
-					array( 'name' => __( 'Monthly Budget Tracker', 'templatelover' ), 'desc' => __( 'Plan income & spending at a glance', 'templatelover' ), 'price' => 19, 'rating' => '4.9', 'tag' => __( 'Bestseller', 'templatelover' ) ),
-					array( 'name' => __( 'Expense Log', 'templatelover' ), 'desc' => __( 'Daily expense capture, weekly view', 'templatelover' ), 'price' => 14, 'rating' => '4.8', 'tag' => __( 'Popular', 'templatelover' ) ),
-					array( 'name' => __( 'Savings Goal Planner', 'templatelover' ), 'desc' => __( 'Visualize and reach savings goals', 'templatelover' ), 'price' => 16, 'rating' => '4.9', 'tag' => __( 'New', 'templatelover' ) ),
-					array( 'name' => __( 'Debt Payoff Planner', 'templatelover' ), 'desc' => __( 'Snowball & avalanche methods built in', 'templatelover' ), 'price' => 22, 'rating' => '4.8', 'tag' => __( 'Popular', 'templatelover' ) ),
-					array( 'name' => __( 'Weekly Finance Planner', 'templatelover' ), 'desc' => __( 'A calm weekly money routine', 'templatelover' ), 'price' => 18, 'rating' => '4.9', 'tag' => __( 'Editor\'s pick', 'templatelover' ) ),
-					array( 'name' => __( 'Freelancer Income Tracker', 'templatelover' ), 'desc' => __( 'Invoices, income, and tax set aside', 'templatelover' ), 'price' => 24, 'rating' => '5.0', 'tag' => __( 'Bestseller', 'templatelover' ) ),
-				);
-				foreach ( $products as $i => $p ) :
+				if ( function_exists( 'wc_get_products' ) ) {
+					$products = wc_get_products( array(
+						'limit'   => 6,
+						'orderby' => 'date',
+						'order'   => 'DESC',
+						'status'  => 'publish',
+					) );
+
+					if ( ! empty( $products ) ) {
+						foreach ( $products as $product ) {
+							$product_id    = $product->get_id();
+							$product_name  = $product->get_name();
+							$product_desc  = $product->get_short_description();
+							$product_price = $product->get_price_html();
+							$product_link  = get_permalink( $product_id );
+							$product_image = $product->get_image_id();
+							$average_rating = $product->get_average_rating();
+							$review_count  = $product->get_review_count();
+
+							// Determine tag based on product age
+							$product_date = $product->get_date_created();
+							$days_old = 0;
+							if ( $product_date ) {
+								$now = new DateTime();
+								$days_old = $now->diff( $product_date )->days;
+							}
+
+							if ( $days_old <= 30 ) {
+								$tag = __( 'New', 'templatelover' );
+							} elseif ( $average_rating >= 4.5 && $review_count >= 5 ) {
+								$tag = __( 'Bestseller', 'templatelover' );
+							} elseif ( $average_rating >= 4.0 ) {
+								$tag = __( 'Popular', 'templatelover' );
+							} else {
+								$tag = '';
+							}
+							?>
+							<article class="tl-product-card">
+								<a href="<?php echo esc_url( $product_link ); ?>" class="tl-product-card__image">
+									<?php if ( $product_image ) : ?>
+										<?php
+										echo wp_get_attachment_image(
+											$product_image,
+											'templatelover-card',
+											false,
+											array(
+												'class'   => 'tl-product-card__img',
+												'loading' => 'lazy',
+												'alt'     => esc_attr( $product_name ),
+											)
+										);
+										?>
+									<?php else : ?>
+										<div class="tl-product-card__placeholder" aria-hidden="true">
+											<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+										</div>
+									<?php endif; ?>
+									<?php if ( $tag ) : ?>
+										<span class="tl-product-card__tag"><?php echo esc_html( $tag ); ?></span>
+									<?php endif; ?>
+								</a>
+								<div class="tl-product-card__body">
+									<div class="tl-product-card__header">
+										<h3 class="tl-product-card__name">
+											<a href="<?php echo esc_url( $product_link ); ?>"><?php echo esc_html( $product_name ); ?></a>
+										</h3>
+										<?php if ( $average_rating > 0 ) : ?>
+											<span class="tl-product-card__rating">
+												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+												<?php echo esc_html( number_format( (float) $average_rating, 1 ) ); ?>
+											</span>
+										<?php endif; ?>
+									</div>
+									<?php if ( $product_desc ) : ?>
+										<p class="tl-product-card__desc"><?php echo wp_kses_post( wp_trim_words( $product_desc, 12 ) ); ?></p>
+									<?php endif; ?>
+									<div class="tl-product-card__footer">
+										<span class="tl-product-card__price"><?php echo $product_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+										<?php if ( $product->is_purchasable() && $product->is_in_stock() ) : ?>
+											<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="tl-btn tl-btn--dark tl-btn--sm" data-quantity="1" data-product_id="<?php echo esc_attr( $product_id ); ?>">
+												<?php echo esc_html( $product->add_to_cart_text() ); ?>
+												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+											</a>
+										<?php else : ?>
+											<a href="<?php echo esc_url( $product_link ); ?>" class="tl-btn tl-btn--dark tl-btn--sm">
+												<?php esc_html_e( 'View product', 'templatelover' ); ?>
+												<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+							</article>
+							<?php
+						}
+					} else {
+						// No products found
+						?>
+						<p class="tl-products__empty"><?php esc_html_e( 'No products available yet. Add products in WooCommerce to see them here.', 'templatelover' ); ?></p>
+						<?php
+					}
+				} else {
+					// WooCommerce not active
 					?>
-					<article class="tl-product-card">
-						<div class="tl-product-card__image">
-							<div class="tl-product-card__placeholder" aria-hidden="true">
-								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-							</div>
-							<span class="tl-product-card__tag"><?php echo esc_html( $p['tag'] ); ?></span>
-						</div>
-						<div class="tl-product-card__body">
-							<div class="tl-product-card__header">
-								<h3 class="tl-product-card__name"><?php echo esc_html( $p['name'] ); ?></h3>
-								<span class="tl-product-card__rating">
-									<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-									<?php echo esc_html( $p['rating'] ); ?>
-								</span>
-							</div>
-							<p class="tl-product-card__desc"><?php echo esc_html( $p['desc'] ); ?></p>
-							<div class="tl-product-card__footer">
-								<span class="tl-product-card__price">$<?php echo esc_html( (string) $p['price'] ); ?></span>
-								<button class="tl-btn tl-btn--dark tl-btn--sm">
-									<?php esc_html_e( 'Add to cart', 'templatelover' ); ?>
-									<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-								</button>
-							</div>
-						</div>
-					</article>
-				<?php endforeach; ?>
+					<p class="tl-products__empty"><?php esc_html_e( 'Install and activate WooCommerce to display products here.', 'templatelover' ); ?></p>
+					<?php
+				}
+				?>
 			</div>
 		</div>
 	</section>
