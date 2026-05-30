@@ -56,13 +56,14 @@ add_action( 'after_setup_theme', 'templatelover_load_textdomain' );
  */
 
 $includes = array(
-	'setup',           // Theme support, nav menus, image sizes.
-	'security',        // Security helpers and hardening.
-	'assets',          // Enqueue styles and scripts.
+	'setup',              // Theme support, nav menus, image sizes.
+	'security',           // Security helpers and hardening.
+	'assets',             // Enqueue styles and scripts.
 	'template-functions', // Template tags and helpers.
-	'blocks',          // Gutenberg / FSE enhancements.
-	'woocommerce',     // WooCommerce compatibility.
-	'customizer',      // Customizer settings.
+	'blocks',             // Gutenberg / FSE enhancements.
+	'woocommerce',        // WooCommerce compatibility.
+	'customizer',         // Customizer settings.
+	'customizer-landing', // Landing page customizer options.
 );
 
 foreach ( $includes as $file ) {
