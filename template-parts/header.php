@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
+<?php
+/**
+ * Template part: Site Header Navigation
+ *
+ * Contains only the site header bar, search overlay, and breadcrumbs.
+ * The DOCTYPE / <html> / <head> / <body> are handled by header.php (root).
+ *
+ * @package TemplateLover
+ * @since   1.0.0
+ */
 
-<a class="skip-link screen-reader-text" href="#primary">
-	<?php esc_html_e( 'Skip to content', 'templatelover' ); ?>
-</a>
+// Prevent direct access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+?>
 
 <header class="templatelover-site-header" role="banner">
 	<div class="templatelover-container templatelover-container--header">
@@ -24,12 +26,11 @@
 			<?php
 			wp_nav_menu(
 				array(
-					'theme_location'  => 'primary',
-					'menu_class'      => 'templatelover-nav',
-					'container'       => false,
-					'fallback_cb'     => false,
-					'depth'           => 2,
-					'aria_label'      => __( 'Primary Menu', 'templatelover' ),
+					'theme_location' => 'primary',
+					'menu_class'     => 'templatelover-nav',
+					'container'      => false,
+					'fallback_cb'    => false,
+					'depth'          => 2,
 				)
 			);
 			?>
@@ -58,7 +59,7 @@
 				</a>
 			<?php endif; ?>
 
-			<a href="#shop" class="templatelover-btn templatelover-btn--primary templatelover-btn--sm templatelover-site-header__cta">
+			<a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ?: home_url( '/' ) ); ?>" class="templatelover-btn templatelover-btn--primary templatelover-btn--sm templatelover-site-header__cta">
 				<?php esc_html_e( 'Shop Now', 'templatelover' ); ?>
 				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
 			</a>
