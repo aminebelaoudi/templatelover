@@ -1488,6 +1488,17 @@ h1, h2, h3, h4, h5, h6, .font-display {
   background: var(--primary);
 }
 
+.tl-hero__content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .tl-hero__content {
+    padding-top: 1.5rem;
+  }
+}
+
 .tl-hero__title {
   margin-top: 1.5rem;
   font-family: var(--font-display);
@@ -1725,7 +1736,6 @@ h1, h2, h3, h4, h5, h6, .font-display {
   border-radius: 1rem;
   border: 1px solid var(--border);
   background: var(--accent);
-  opacity: 0.4;
 }
 
 .tl-featured__image {
@@ -1758,6 +1768,17 @@ h1, h2, h3, h4, h5, h6, .font-display {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.tl-featured__content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .tl-featured__content {
+    padding-top: 0.5rem;
+  }
 }
 
 .tl-featured__title {
@@ -1882,7 +1903,6 @@ h1, h2, h3, h4, h5, h6, .font-display {
   position: relative;
   overflow: hidden;
   background: var(--accent);
-  opacity: 0.4;
 }
 
 .tl-product-card__placeholder {
@@ -1984,6 +2004,11 @@ h1, h2, h3, h4, h5, h6, .font-display {
   .tl-benefits__grid {
     grid-template-columns: 4fr 8fr;
   }
+}
+
+.tl-benefits__intro {
+  display: flex;
+  flex-direction: column;
 }
 
 .tl-benefits__title {
@@ -2218,6 +2243,11 @@ h1, h2, h3, h4, h5, h6, .font-display {
 
 @media (min-width: 1024px) {
   .tl-faq__grid { grid-template-columns: 4fr 8fr; }
+}
+
+.tl-faq__intro {
+  display: flex;
+  flex-direction: column;
 }
 
 .tl-faq__desc {
