@@ -1,0 +1,403 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.4/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "defaultDuotone": false,
+      "palette": [
+        {
+          "slug": "background",
+          "color": "#F8F7F3",
+          "name": "Background"
+        },
+        {
+          "slug": "foreground",
+          "color": "#1F2933",
+          "name": "Foreground"
+        },
+        {
+          "slug": "surface",
+          "color": "#FFFFFF",
+          "name": "Surface"
+        },
+        {
+          "slug": "primary",
+          "color": "#0E6B63",
+          "name": "Primary"
+        },
+        {
+          "slug": "primary-foreground",
+          "color": "#FAFAFA",
+          "name": "Primary Foreground"
+        },
+        {
+          "slug": "secondary",
+          "color": "#F5F4F0",
+          "name": "Secondary"
+        },
+        {
+          "slug": "secondary-foreground",
+          "color": "#1F2933",
+          "name": "Secondary Foreground"
+        },
+        {
+          "slug": "muted",
+          "color": "#F3F2EE",
+          "name": "Muted"
+        },
+        {
+          "slug": "muted-foreground",
+          "color": "#6B7280",
+          "name": "Muted Foreground"
+        },
+        {
+          "slug": "accent",
+          "color": "#DDF3EE",
+          "name": "Accent"
+        },
+        {
+          "slug": "accent-foreground",
+          "color": "#0E6B63",
+          "name": "Accent Foreground"
+        },
+        {
+          "slug": "destructive",
+          "color": "#EF4444",
+          "name": "Destructive"
+        },
+        {
+          "slug": "destructive-foreground",
+          "color": "#FFFFFF",
+          "name": "Destructive Foreground"
+        },
+        {
+          "slug": "border",
+          "color": "#E7E5E4",
+          "name": "Border"
+        },
+        {
+          "slug": "input",
+          "color": "#E7E5E4",
+          "name": "Input"
+        },
+        {
+          "slug": "ring",
+          "color": "#0E6B63",
+          "name": "Ring"
+        }
+      ],
+      "gradients": [
+        {
+          "slug": "primary-to-accent",
+          "gradient": "linear-gradient(135deg, #0E6B63 0%, #DDF3EE 100%)",
+          "name": "Primary to Accent"
+        },
+        {
+          "slug": "soft-surface",
+          "gradient": "linear-gradient(180deg, #FFFFFF 0%, #F8F7F3 100%)",
+          "name": "Soft Surface"
+        }
+      ]
+    },
+    "typography": {
+      "defaultFontSizes": false,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "'Boska', ui-serif, Georgia, serif",
+          "slug": "boska",
+          "name": "Boska (Display)",
+          "fontFace": [
+            {
+              "fontFamily": "Boska",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "src": [ "https://api.fontshare.com/v2/css?f[]=boska@400" ]
+            },
+            {
+              "fontFamily": "Boska",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "src": [ "https://api.fontshare.com/v2/css?f[]=boska@700" ]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'Satoshi', ui-sans-serif, system-ui, sans-serif",
+          "slug": "satoshi",
+          "name": "Satoshi (UI)",
+          "fontFace": [
+            {
+              "fontFamily": "Satoshi",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "src": [ "https://api.fontshare.com/v2/css?f[]=satoshi@400" ]
+            },
+            {
+              "fontFamily": "Satoshi",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "src": [ "https://api.fontshare.com/v2/css?f[]=satoshi@700" ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "xs",
+          "size": "0.75rem",
+          "name": "Extra Small"
+        },
+        {
+          "slug": "sm",
+          "size": "0.875rem",
+          "name": "Small"
+        },
+        {
+          "slug": "base",
+          "size": "1rem",
+          "name": "Base"
+        },
+        {
+          "slug": "lg",
+          "size": "1.125rem",
+          "name": "Large"
+        },
+        {
+          "slug": "xl",
+          "size": "1.25rem",
+          "name": "Extra Large"
+        },
+        {
+          "slug": "2xl",
+          "size": "1.5rem",
+          "name": "2X Large"
+        },
+        {
+          "slug": "3xl",
+          "size": "1.875rem",
+          "name": "3X Large"
+        },
+        {
+          "slug": "4xl",
+          "size": "2.25rem",
+          "name": "4X Large"
+        },
+        {
+          "slug": "5xl",
+          "size": "3rem",
+          "name": "5X Large"
+        },
+        {
+          "slug": "6xl",
+          "size": "3.75rem",
+          "name": "6X Large"
+        },
+        {
+          "slug": "7xl",
+          "size": "4.5rem",
+          "name": "7X Large"
+        }
+      ],
+      "lineHeight": true,
+      "textDecoration": true,
+      "textTransform": true,
+      "letterSpacing": true,
+      "fontStyle": true,
+      "fontWeight": true,
+      "dropCap": false
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true,
+      "units": [ "px", "em", "rem", "vh", "vw", "%" ],
+      "spacingScale": {
+        "operator": "*",
+        "increment": 1.5,
+        "steps": 7,
+        "mediumStep": 4,
+        "unit": "rem"
+      },
+      "spacingSizes": [
+        { "name": "4XS", "size": "0.25rem", "slug": "4-xs" },
+        { "name": "3XS", "size": "0.5rem", "slug": "3-xs" },
+        { "name": "2XS", "size": "0.75rem", "slug": "2-xs" },
+        { "name": "XS", "size": "1rem", "slug": "xs" },
+        { "name": "S", "size": "1.5rem", "slug": "s" },
+        { "name": "M", "size": "2rem", "slug": "m" },
+        { "name": "L", "size": "3rem", "slug": "l" },
+        { "name": "XL", "size": "4rem", "slug": "xl" },
+        { "name": "2XL", "size": "6rem", "slug": "2-xl" },
+        { "name": "3XL", "size": "8rem", "slug": "3-xl" }
+      ]
+    },
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1280px"
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": {
+      "presets": [
+        {
+          "name": "Soft",
+          "slug": "soft",
+          "shadow": "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04)"
+        },
+        {
+          "name": "Card",
+          "slug": "card",
+          "shadow": "0 1px 2px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06)"
+        }
+      ]
+    },
+    "custom": {
+      "border-radius": "0.75rem"
+    },
+    "blocks": {
+      "core/paragraph": {
+        "typography": {
+          "fontSizes": [],
+          "fontFamilies": []
+        }
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--background)",
+      "text": "var(--wp--preset--color--foreground)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--satoshi)",
+      "fontSize": "var(--wp--preset--font-size--base)",
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--boska)",
+          "fontWeight": "700",
+          "letterSpacing": "-0.02em",
+          "lineHeight": "1.1"
+        },
+        "color": {
+          "text": "var(--wp--preset--color--foreground)"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--6xl)"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--5xl)"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--4xl)"
+        }
+      },
+      "h4": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--3xl)"
+        }
+      },
+      "h5": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--2xl)"
+        }
+      },
+      "h6": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--xl)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--primary)"
+        },
+        "typography": {
+          "textDecoration": "none"
+        },
+        ":hover": {
+          "typography": {
+            "textDecoration": "underline"
+          }
+        }
+      },
+      "button": {
+        "border": {
+          "radius": "9999px"
+        },
+        "color": {
+          "background": "var(--wp--preset--color--primary)",
+          "text": "var(--wp--preset--color--primary-foreground)"
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--satoshi)",
+          "fontSize": "var(--wp--preset--font-size--sm)",
+          "fontWeight": "500"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.75rem",
+            "bottom": "0.75rem",
+            "left": "1.5rem",
+            "right": "1.5rem"
+          }
+        },
+        ":hover": {
+          "color": {
+            "background": "var(--wp--preset--color--foreground)",
+            "text": "var(--wp--preset--color--background)"
+          }
+        }
+      }
+    }
+  },
+  "templateParts": [
+    {
+      "name": "header",
+      "title": "Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "area": "footer"
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "area": "sidebar"
+    }
+  ],
+  "customTemplates": [
+    {
+      "name": "full-width",
+      "title": "Full Width",
+      "postTypes": ["page", "post"]
+    },
+    {
+      "name": "landing-page",
+      "title": "Landing Page",
+      "postTypes": ["page"]
+    }
+  ]
+}

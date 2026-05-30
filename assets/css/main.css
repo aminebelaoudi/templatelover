@@ -1,0 +1,1320 @@
+@import url("https://api.fontshare.com/v2/css?f[]=boska@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap");
+
+/* ==================================================================
+   TemplateLover — Main Stylesheet
+   ================================================================== */
+
+:root {
+  --radius: 0.75rem;
+
+  --background: #F8F7F3;
+  --foreground: #1F2933;
+  --surface: #FFFFFF;
+
+  --card: #FFFFFF;
+  --card-foreground: #1F2933;
+
+  --primary: #0E6B63;
+  --primary-foreground: #FAFAFA;
+
+  --secondary: #F5F4F0;
+  --secondary-foreground: #1F2933;
+
+  --muted: #F3F2EE;
+  --muted-foreground: #6B7280;
+
+  --accent: #DDF3EE;
+  --accent-foreground: #0E6B63;
+
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E7E5E4;
+  --input: #E7E5E4;
+  --ring: #0E6B63;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.04);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06);
+
+  --font-display: "Boska", ui-serif, Georgia, serif;
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark, .is-style-dark {
+  --background: #111827;
+  --foreground: #F9FAFB;
+  --surface: #1F2937;
+  --card: #1F2937;
+  --primary: #34D399;
+  --primary-foreground: #111827;
+  --secondary: #374151;
+  --muted: #374151;
+  --muted-foreground: #9CA3AF;
+  --accent: #064E3B;
+  --border: rgba(255,255,255,0.1);
+  --input: rgba(255,255,255,0.15);
+  --ring: #34D399;
+}
+
+/* ------------------------------------------------------------------
+   Reset & Base
+   ------------------------------------------------------------------ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--foreground);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------
+   Screen Reader / Accessibility
+   ------------------------------------------------------------------ */
+
+.screen-reader-text {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 8px 16px;
+  z-index: 100000;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ------------------------------------------------------------------
+   Container
+   ------------------------------------------------------------------ */
+
+.templatelover-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .templatelover-container {
+    padding-inline: 2rem;
+  }
+}
+
+.templatelover-container--narrow {
+  max-width: 720px;
+}
+
+.templatelover-container--wide {
+  max-width: 1280px;
+}
+
+.templatelover-container--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+/* ------------------------------------------------------------------
+   Typography
+   ------------------------------------------------------------------ */
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* ------------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------------ */
+
+.templatelover-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.templatelover-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.templatelover-btn--primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: var(--shadow-soft);
+}
+
+.templatelover-btn--primary:hover {
+  opacity: 0.9;
+}
+
+.templatelover-btn--secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border-color: var(--border);
+}
+
+.templatelover-btn--secondary:hover {
+  background-color: var(--muted);
+}
+
+.templatelover-btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+
+/* ------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------ */
+
+.templatelover-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(231, 229, 228, 0.7);
+  background-color: rgba(248, 247, 243, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .templatelover-site-header {
+    background-color: rgba(248, 247, 243, 0.97);
+  }
+}
+
+.templatelover-container--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+/* Logo */
+.templatelover-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.templatelover-logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.templatelover-logo__text {
+  font-weight: 700;
+}
+
+/* Navigation */
+.templatelover-site-header__nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .templatelover-site-header__nav {
+    display: block;
+  }
+}
+
+.templatelover-nav,
+.templatelover-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.templatelover-nav a {
+  font-size: 0.875rem;
+  color: rgba(31, 41, 51, 0.8);
+  transition: color 0.15s ease;
+}
+
+.templatelover-nav a:hover,
+.templatelover-nav a[aria-current="page"] {
+  color: var(--foreground);
+}
+
+.templatelover-nav .sub-menu {
+  display: none;
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 0.5rem 0;
+  min-width: 12rem;
+}
+
+.templatelover-nav li:hover > .sub-menu,
+.templatelover-nav li:focus-within > .sub-menu {
+  display: block;
+}
+
+/* Header Actions */
+.templatelover-site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.templatelover-site-header__search-toggle,
+.templatelover-site-header__cart,
+.templatelover-site-header__menu-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: rgba(31, 41, 51, 0.8);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.templatelover-site-header__search-toggle:hover,
+.templatelover-site-header__cart:hover,
+.templatelover-site-header__menu-toggle:hover {
+  background-color: var(--secondary);
+}
+
+.templatelover-cart-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+.templatelover-site-header__cart {
+  position: relative;
+}
+
+.templatelover-site-header__menu-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .templatelover-site-header__menu-toggle {
+    display: none;
+  }
+}
+
+.templatelover-site-header__menu-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.templatelover-site-header__cta {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .templatelover-site-header__cta {
+    display: inline-flex;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Search Overlay
+   ------------------------------------------------------------------ */
+
+.templatelover-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(248, 247, 243, 0.97);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.templatelover-search-overlay[hidden] {
+  display: none;
+}
+
+.templatelover-search-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.templatelover-search-overlay__inner {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  position: relative;
+}
+
+.templatelover-search-overlay .search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.templatelover-search-overlay .search-field {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 1rem;
+  color: var(--foreground);
+}
+
+.templatelover-search-overlay .search-field:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px rgba(14, 107, 99, 0.15);
+}
+
+.templatelover-search-overlay .search-submit {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.templatelover-search-overlay__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--foreground);
+}
+
+/* ------------------------------------------------------------------
+   Breadcrumbs
+   ------------------------------------------------------------------ */
+
+.templatelover-breadcrumbs-wrap {
+  border-bottom: 1px solid var(--border);
+  background-color: var(--surface);
+  padding: 0.75rem 0;
+}
+
+.templatelover-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.templatelover-breadcrumbs a {
+  color: var(--muted-foreground);
+  transition: color 0.15s ease;
+}
+
+.templatelover-breadcrumbs a:hover {
+  color: var(--foreground);
+}
+
+.templatelover-breadcrumbs__sep {
+  color: var(--border);
+}
+
+/* ------------------------------------------------------------------
+   Main Content
+   ------------------------------------------------------------------ */
+
+.templatelover-main {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.templatelover-main--full-width .templatelover-container--wide {
+  max-width: 1280px;
+}
+
+/* ------------------------------------------------------------------
+   Page Header
+   ------------------------------------------------------------------ */
+
+.templatelover-page-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.templatelover-page-header__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+}
+
+.templatelover-page-header__desc {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+/* ------------------------------------------------------------------
+   Posts Grid & Cards
+   ------------------------------------------------------------------ */
+
+.templatelover-posts-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .templatelover-posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .templatelover-posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.templatelover-post-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.templatelover-post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.templatelover-post-card__thumb {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 5/4;
+}
+
+.templatelover-post-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.templatelover-post-card:hover .templatelover-post-card__thumb img {
+  transform: scale(1.03);
+}
+
+.templatelover-post-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem;
+}
+
+.templatelover-post-card__meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.templatelover-post-card__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.templatelover-post-card__title a {
+  color: var(--foreground);
+  transition: color 0.15s ease;
+}
+
+.templatelover-post-card__title a:hover {
+  color: var(--primary);
+}
+
+.templatelover-post-card__excerpt {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.templatelover-post-card__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: auto;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* ------------------------------------------------------------------
+   Single Post
+   ------------------------------------------------------------------ */
+
+.templatelover-post-single {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.templatelover-post-single__header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.templatelover-post-single__meta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+}
+
+.templatelover-post-single__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.templatelover-post-single__thumb {
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.templatelover-post-single__thumb img {
+  width: 100%;
+  height: auto;
+}
+
+.templatelover-post-single__content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.templatelover-post-single__content > * + * {
+  margin-top: 1.5rem;
+}
+
+.templatelover-post-single__content h2,
+.templatelover-post-single__content h3,
+.templatelover-post-single__content h4 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.templatelover-post-single__content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.templatelover-post-single__content blockquote {
+  padding: 1.5rem 2rem;
+  border-left: 4px solid var(--primary);
+  background-color: var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic;
+}
+
+.templatelover-post-single__content ul,
+.templatelover-post-single__content ol {
+  padding-left: 1.5rem;
+}
+
+.templatelover-post-single__content img {
+  border-radius: var(--radius);
+}
+
+.templatelover-post-single__footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.templatelover-post-single__tags-label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+/* ------------------------------------------------------------------
+   Page Content
+   ------------------------------------------------------------------ */
+
+.templatelover-page-content__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+.templatelover-page-content__thumb {
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.templatelover-page-content__body {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------------
+   404 Page
+   ------------------------------------------------------------------ */
+
+.templatelover-error-404 {
+  text-align: center;
+  max-width: 28rem;
+  padding: 2rem;
+}
+
+.templatelover-error-404__code {
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--foreground);
+}
+
+.templatelover-error-404__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.templatelover-error-404__message {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+}
+
+.templatelover-error-404__actions {
+  margin-top: 1.5rem;
+}
+
+/* ------------------------------------------------------------------
+   Search Results
+   ------------------------------------------------------------------ */
+
+.templatelover-search-result {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.templatelover-search-result__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.templatelover-search-result__title a {
+  color: var(--foreground);
+}
+
+.templatelover-search-result__title a:hover {
+  color: var(--primary);
+}
+
+.templatelover-search-result__meta {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.templatelover-search-result__excerpt {
+  font-size: 0.9375rem;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------
+   No Results
+   ------------------------------------------------------------------ */
+
+.templatelover-no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.templatelover-no-results__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.templatelover-no-results__message {
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.templatelover-no-results .search-form {
+  max-width: 400px;
+  margin-inline: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.templatelover-no-results .search-field {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.templatelover-no-results .search-submit {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------------
+   Pagination
+   ------------------------------------------------------------------ */
+
+.nav-links,
+.templatelover-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+
+.nav-links a,
+.nav-links span,
+.templatelover-pagination a,
+.templatelover-pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
+  transition: background-color 0.15s ease;
+}
+
+.nav-links a:hover,
+.templatelover-pagination a:hover {
+  background-color: var(--secondary);
+}
+
+.nav-links .current,
+.templatelover-pagination .current {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+/* ------------------------------------------------------------------
+   Comments
+   ------------------------------------------------------------------ */
+
+.comments-area {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.comments-title {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.comment-list {
+  list-style: none;
+}
+
+.comment-list .comment {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.comment-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.comment-author .fn {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.comment-content {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.comment-form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-bottom: 1rem;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+  outline: none;
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px rgba(14, 107, 99, 0.15);
+}
+
+.comment-form .submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.comment-form .submit:hover {
+  opacity: 0.9;
+}
+
+/* ------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------ */
+
+.templatelover-site-footer {
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+  padding-top: 3.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.templatelover-site-footer__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .templatelover-site-footer__grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.templatelover-site-footer__tagline {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  max-width: 20rem;
+}
+
+.templatelover-footer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .templatelover-footer-nav {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.templatelover-footer-nav a {
+  font-size: 0.875rem;
+  color: rgba(31, 41, 51, 0.8);
+  transition: color 0.15s ease;
+}
+
+.templatelover-footer-nav a:hover {
+  color: var(--foreground);
+}
+
+.templatelover-site-footer__bottom {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+@media (min-width: 640px) {
+  .templatelover-site-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ------------------------------------------------------------------
+   WooCommerce Overrides
+   ------------------------------------------------------------------ */
+
+.templatelover-wc__main {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.templatelover-woocommerce .woocommerce-breadcrumb {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.templatelover-woocommerce .woocommerce-breadcrumb a {
+  color: var(--muted-foreground);
+}
+
+.templatelover-woocommerce .woocommerce-breadcrumb a:hover {
+  color: var(--foreground);
+}
+
+.woocommerce .products {
+  display: grid !important;
+  grid-template-columns: repeat(1, 1fr) !important;
+  gap: 2rem !important;
+}
+
+@media (min-width: 640px) {
+  .woocommerce .products {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .woocommerce .products {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+.woocommerce .product {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.woocommerce .product:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.woocommerce .product a img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5/4;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.woocommerce .product:hover a img {
+  transform: scale(1.03);
+}
+
+.woocommerce .product .woocommerce-loop-product__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.woocommerce .product .price {
+  padding: 0 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.woocommerce .product .button {
+  margin: 1rem 1.25rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  border: none;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.woocommerce .product .button:hover {
+  opacity: 0.9;
+}
+
+.woocommerce .woocommerce-ordering select {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 0.875rem;
+}
+
+/* ------------------------------------------------------------------
+   Editor Styles (shared base for editor-style.css)
+   ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+   WordPress Alignments
+   ------------------------------------------------------------------ */
+
+.alignleft {
+  float: left;
+  margin-right: 1.5rem;
+}
+
+.alignright {
+  float: right;
+  margin-left: 1.5rem;
+}
+
+.aligncenter {
+  display: block;
+  margin-inline: auto;
+}
+
+.alignwide {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.alignfull {
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+/* ------------------------------------------------------------------
+   Gutenberg Block Styles
+   ------------------------------------------------------------------ */
+
+.is-style-pill .wp-block-button__link {
+  border-radius: 9999px !important;
+}
+
+.is-style-ghost .wp-block-button__link {
+  background: transparent !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.is-style-ghost .wp-block-button__link:hover {
+  background: var(--secondary) !important;
+}
+
+.is-style-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.is-style-surface {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.is-style-lead {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.is-style-display {
+  line-height: 1.02;
+}
+
+/* ------------------------------------------------------------------
+   Widgets / Sidebar
+   ------------------------------------------------------------------ */
+
+.templatelover-sidebar .widget {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.templatelover-sidebar .widget-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.templatelover-sidebar ul {
+  list-style: none;
+}
+
+.templatelover-sidebar li + li {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.templatelover-sidebar a {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 0.15s ease;
+}
+
+.templatelover-sidebar a:hover {
+  color: var(--foreground);
+}
+
+/* ------------------------------------------------------------------
+   Helper utilities
+   ------------------------------------------------------------------ */
+
+.templatelover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.templatelover-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}

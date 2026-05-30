@@ -1,0 +1,21 @@
+/*
+Theme Name: TemplateLover
+Theme URI: https://github.com/aminebelaoudi/templatelover
+Author: Amine Belaoudi
+Author URI: https://github.com/aminebelaoudi
+Description: A premium editorial WordPress theme for digital product marketplaces. Inspired by calm, structured design with a focus on clarity and conversion. Supports Full Site Editing, WooCommerce, Gutenberg blocks, and is optimized for Core Web Vitals, accessibility (WCAG 2.1), and SEO.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 8.2
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: templatelover
+Domain Path: /languages
+Tags: e-commerce, blog, portfolio, grid-layout, one-column, two-columns, wide-blocks, block-patterns, block-styles, custom-colors, custom-logo, custom-menu, editor-style, featured-images, footer-widgets, full-site-editing, rtl-language-support, sticky-post, threaded-comments, translation-ready, woocommerce
+*/
+
+/* ------------------------------------------------------------------
+ * Ce fichier ne doit contenir QUE l'en-tête du thème ci-dessus.
+ * Tous les styles sont dans assets/css/main.css et injectés via
+ * wp_enqueue_style() dans includes/assets.php.
+ * ------------------------------------------------------------------ */
