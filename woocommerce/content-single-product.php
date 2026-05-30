@@ -179,7 +179,10 @@ $all_image_ids  = $main_image_id ? array_merge( array( $main_image_id ), $galler
 
 						<!-- Add to cart -->
 						<?php if ( $product->is_purchasable() && $product->is_in_stock() ) : ?>
-							<form class="tl-sp__cart-form" method="post" enctype="multipart/form-data">
+							<form class="tl-sp__cart-form cart" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product_id ); ?>">
+								<?php wp_nonce_field( 'templatelover_add_to_cart', 'templatelover_cart_nonce' ); ?>
+
 								<div class="tl-sp__quantity-row">
 									<div class="tl-sp__quantity">
 										<button type="button" class="tl-sp__qty-btn tl-sp__qty-btn--minus" aria-label="<?php esc_attr_e( 'Decrease quantity', 'templatelover' ); ?>">
@@ -201,7 +204,7 @@ $all_image_ids  = $main_image_id ? array_merge( array( $main_image_id ), $galler
 									</div>
 								</div>
 
-								<button type="submit" class="tl-sp__add-to-cart" data-product_id="<?php echo esc_attr( $product_id ); ?>">
+								<button type="submit" class="tl-sp__add-to-cart single_add_to_cart_button" data-product_id="<?php echo esc_attr( $product_id ); ?>">
 									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
 									<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 								</button>

@@ -119,6 +119,21 @@ function templatelover_wc_products_per_page(): int {
 add_filter( 'loop_shop_per_page', 'templatelover_wc_products_per_page' );
 
 /**
+ * Disable WooCommerce default stylesheets.
+ *
+ * WooCommerce loads woocommerce-general.css, woocommerce-layout.css,
+ * and woocommerce-smallscreen.css by default. These conflict with
+ * our custom theme styles, so we disable them entirely.
+ *
+ * @since 1.0.0
+ * @return array Empty array to disable all WC styles.
+ */
+function templatelover_wc_disable_styles(): array {
+	return array();
+}
+add_filter( 'woocommerce_enqueue_styles', 'templatelover_wc_disable_styles' );
+
+/**
  * Remove WooCommerce default breadcrumb (theme provides its own).
  *
  * @since 1.0.0
